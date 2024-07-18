@@ -1,0 +1,6 @@
+.vs/
+bin/
+obj/
+typings/
+*.lock.json
+*.log
