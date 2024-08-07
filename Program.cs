@@ -49,7 +49,7 @@ namespace jcBENCH.MVC
 
             if (configuration.Value is null)
             {
-                throw new Exception("Configuration not set");
+                throw new NullReferenceException("Configuration not set");
             }
 
             builder.Services.AddDbContext<MainDbContext>(options => options.UseNpgsql(configuration.Value));
