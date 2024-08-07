@@ -16,16 +16,16 @@ namespace jcBENCH.MVC.Objects
         public required string cpu_architecture { get; set; }
 
         [DataMember]
-        public int cpu_cores { get; set; }
+        public required int cpu_cores { get; set; }
 
         [DataMember]
-        public int score { get; set; }
+        public required int score { get; set; }
 
         [DataMember]
         public required string benchmark_name { get; set; }
 
         [DataMember]
-        public int benchmark_api_version { get; set; }
+        public required int benchmark_api_version { get; set; }
 
         [DataMember]
         public required string benchmark_threading_model { get; set; }
