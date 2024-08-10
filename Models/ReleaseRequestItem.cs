@@ -10,6 +10,6 @@
 
         public required bool IsPreRelease { get; set; }
 
-        public List<ReleaseArtifactRequestItem> Artifacts { get; set; }
+        public required List<ReleaseArtifactRequestItem> Artifacts { get; set; }
     }
 }
