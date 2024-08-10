@@ -34,7 +34,7 @@ namespace jcBENCH.MVC
                         ValidIssuer = apiConfig?.JWTIssuer,
                         ValidAudience = apiConfig?.JWTAudience,
                         ClockSkew = TimeSpan.Zero,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(apiConfig.JWTSecret))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(apiConfig is not null ? apiConfig.JWTSecret : throw new NullReferenceException("Check your config")))
                     };
                 });
             }
@@ -48,7 +48,7 @@ namespace jcBENCH.MVC
 
             if (configuration.Value is null)
             {
-                throw new ArgumentNullException("Configuration not set");
+                throw new NullReferenceException("Configuration not set");
             }
 
             builder.Services.AddDbContext<MainDbContext>(options => options.UseNpgsql(configuration.Value));

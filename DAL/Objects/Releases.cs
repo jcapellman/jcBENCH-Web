@@ -21,6 +21,6 @@ namespace jcBENCH.MVC.DAL.Objects
         [Required]
         public required string Description { get; set; }
 
-        public ICollection<ReleaseArtifacts> ReleaseArtifacts { get; } = new List<ReleaseArtifacts>();
+        public ICollection<ReleaseArtifacts> ReleaseArtifacts { get; } = [];
     }
 }

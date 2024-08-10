@@ -24,6 +24,6 @@ namespace jcBENCH.MVC.DAL.Objects
 
         public int ReleaseID { get; set; }
 
-        public required Releases Release { get; set; }
+        public Releases Release { get; set; }
     }
 }
