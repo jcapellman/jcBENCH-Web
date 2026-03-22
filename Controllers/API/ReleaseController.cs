@@ -23,18 +23,20 @@ namespace jcBENCH.MVC.Controllers.API
                 ReleaseDate = requestItem.ReleaseDate
             };
 
-            foreach (var releaseArtifact in requestItem.Artifacts.Select(artifact => new ReleaseArtifacts
+            var artifacts = requestItem.Artifacts.Select(artifact => new ReleaseArtifacts
             {
                 Architecture = artifact.Architecture,
                 Description = artifact.Description,
                 DownloadURI = artifact.DownloadURI,
                 OperatingSystem = artifact.OperatingSystem
-            }))
+            });
+
+            foreach (var artifact in artifacts)
             {
-                release.ReleaseArtifacts.Add(releaseArtifact);
+                release.ReleaseArtifacts.Add(artifact);
             }
 
-            await dbContext.Releases.AddAsync(release);
+            dbContext.Releases.Add(release);
 
             return await dbContext.SaveChangesAsync() > 0;
         }
@@ -53,7 +55,7 @@ namespace jcBENCH.MVC.Controllers.API
                 ReleaseID = releaseId
             };
 
-            await dbContext.ReleaseArtifacts.AddAsync(releaseArtifact);
+            dbContext.ReleaseArtifacts.Add(releaseArtifact);
 
             return await dbContext.SaveChangesAsync() > 0;
         }

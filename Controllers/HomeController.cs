@@ -10,20 +10,32 @@ namespace jcBENCH.MVC.Controllers
     public class HomeController(MainDbContext dbContext) : Controller
     {
         [Route("downloads")]
-        public ActionResult Downloads()
+        public async Task<ActionResult> DownloadsAsync()
         {
-            var releases = dbContext.Releases.Include(a => a.ReleaseArtifacts).OrderByDescending(a => a.ReleaseDate).ToList();
+            var releases = await dbContext.Releases
+                .AsNoTracking()
+                .Include(a => a.ReleaseArtifacts)
+                .OrderByDescending(a => a.ReleaseDate)
+                .ToListAsync();
 
-            return View(releases);
+            return View("Downloads", releases);
         }
 
         [Route("about")]
         public ActionResult About() => View();
 
         [Route("")]
-        public ActionResult Index() => View(dbContext.BenchmarkResults.OrderByDescending(a => a.BenchmarkResult).ToList());
+        public async Task<ActionResult> IndexAsync() => 
+            View("Index", await dbContext.BenchmarkResults
+                .AsNoTracking()
+                .OrderByDescending(a => a.BenchmarkResult)
+                .ToListAsync());
 
         [Route("archives")]
-        public ActionResult Archives() => View(dbContext.BenchmarkResults.OrderBy(a => a.BenchmarkName).ToList());
+        public async Task<ActionResult> ArchivesAsync() => 
+            View("Archives", await dbContext.BenchmarkResults
+                .AsNoTracking()
+                .OrderBy(a => a.BenchmarkName)
+                .ToListAsync());
     }
 }

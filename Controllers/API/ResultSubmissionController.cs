@@ -24,7 +24,7 @@ namespace jcBENCH.MVC.Controllers.API
                 BenchmarkAPIVersion = submissionItem.benchmark_api_version
             };
 
-            await dbContext.BenchmarkResults.AddAsync(resultItem);
+            dbContext.BenchmarkResults.Add(resultItem);
 
             return await dbContext.SaveChangesAsync() > 0;
         }
